@@ -1,12 +1,5 @@
 "use strict"
 
-window.onload = function() {
-initTeamsDropdown();
-const submitBtn = document.getElementById("submitBtn");
-submitBtn.onclick = displayInfo();
-}
-
-function initTeamsDropdown() {
 
     let teams = [
         {code:"DAL", name:"Dallas Cowboys", plays:"Arlington, TX"},
@@ -28,15 +21,35 @@ function initTeamsDropdown() {
         const teamsList = document.getElementById("footballTeam");
 
         let length = teams.length 
-        for (let i = 0; i < length; i++) {
-            // create the option element 
-            let theOption = document.createElement("option")
 
-            //set the text & value 
-            theOption.textContent = names[i];
-            theOption.value = codes[i];
+        window.onload = function() {
+            initTeamsDropdown() 
+            const SubmitBtn = document.getElementById("submitBtn");
+            SubmitBtn.onclick = displayInfo;
 
-            // append option 
-            teamsList.appendChild(theOption);
+
         }
- }
+        function initTeamsDropdown() {
+
+            for (let i = 0; i < length; i++) {
+                // create the option element 
+                let theOption = document.createElement("option")
+    
+                //set the text & value 
+                theOption.textContent = names[i];
+                theOption.value = codes[i];
+    
+                // append option 
+                footballTeam.appendChild(theOption);
+            }
+
+        }
+    function displayInfo() {
+        let selectedValue = footballTeam.value;
+        for (let i = 0; i < length; i++) {
+            if (selectedValue == codes[i]) {
+                document.getElementById("teamInfo").innerHTML = " You selected the " + names[i] + codes[i] + " who play in " + locations[i];
+            }
+        }
+        return false;
+    }
